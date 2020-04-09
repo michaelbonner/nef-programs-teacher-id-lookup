@@ -185,7 +185,7 @@ const Container = styled.div`
 const TeacherIDLookup = () => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [schoolSearch, setSchoolSearch] = useState("West Oakview");
+  const [schoolSearch, setSchoolSearch] = useState("");
   const [schoolSearchState, setSchoolSearchState] = useState("initial");
   const [schools, setSchools] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState(false);
@@ -283,11 +283,12 @@ const TeacherIDLookup = () => {
             <label htmlFor="schoolSearch">School Name</label>
             <input
               id="schoolSearch"
-              type="text"
-              value={schoolSearch}
               onChange={(e) => {
                 setSchoolSearch(e.target.value);
               }}
+              placeholder="School Name"
+              type="text"
+              value={schoolSearch}
             />
           </div>
           <div className={`${isSubmitting ? "opacity-25" : ""}`}>
