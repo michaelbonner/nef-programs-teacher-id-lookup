@@ -197,7 +197,6 @@ const TeacherIDLookup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [schoolSearch, setSchoolSearch] = useState("");
   const [schoolSearchState, setSchoolSearchState] = useState("initial");
-  const [schoolCity, setSchoolCity] = useState("initial");
   const [schools, setSchools] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState(false);
   const [teacherSearchState, setTeacherSearchState] = useState("initial");
