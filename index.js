@@ -36,18 +36,19 @@ const Container = styled.div`
     margin-bottom: 2rem;
 
     button {
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: #a0aec0;
       background-color: white;
       border: thin solid white;
       appearance: none;
       padding: 0.5rem 0.75rem;
       flex: 1 1 0%;
+      margin: 0 1rem;
     }
 
     .active {
       color: #38b2ac;
-      border-bottom: thin solid #a0aec0;
+      border-bottom: thin solid #38b2ac;
     }
   }
 
@@ -267,7 +268,7 @@ const TeacherIDLookup = () => {
           }}
           className="active"
         >
-          1. Find Your School
+          <strong>1</strong> <small>Find Your School</small>
         </button>
         <button
           onClick={(e) => {
@@ -280,14 +281,14 @@ const TeacherIDLookup = () => {
           className={step > 1 ? "active" : ""}
           disabled={step < 2}
         >
-          2. Find Your Teacher
+          <strong>2</strong> <small>Find Your Teacher</small>
         </button>
         <button
           onClick={(e) => e.preventDefault()}
           className={step > 2 ? "active" : ""}
           disabled={step < 3}
         >
-          3. Submit Your HEW
+          <strong>3</strong> <small>Submit Your HEW</small>
         </button>
       </div>
 
