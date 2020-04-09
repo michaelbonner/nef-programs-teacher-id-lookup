@@ -59,8 +59,8 @@ const Container = styled.div`
     background: white;
     border: thin solid #a0aec0;
     margin-top: 2rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
   }
