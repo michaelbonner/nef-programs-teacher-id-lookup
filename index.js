@@ -197,6 +197,7 @@ const TeacherIDLookup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [schoolSearch, setSchoolSearch] = useState("");
   const [schoolSearchState, setSchoolSearchState] = useState("initial");
+  const [schoolCity, setSchoolCity] = useState("initial");
   const [schools, setSchools] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState(false);
   const [teacherSearchState, setTeacherSearchState] = useState("initial");
@@ -268,7 +269,7 @@ const TeacherIDLookup = () => {
           }}
           className="active"
         >
-          <strong>1</strong> <small>Find Your School</small>
+          <strong>1</strong> <small>Find Your School - Enter the keyword of your school's name example - Kennedy for John F Kennedy</small>
         </button>
         <button
           onClick={(e) => {
@@ -312,7 +313,7 @@ const TeacherIDLookup = () => {
             </button>
           </div>
           <div>
-            {schools.length ? <p>Choose your teacher from the list</p> : ""}
+            {schools.length ? <p>Choose from the list</p> : ""}
             {schoolSearchState === "error" && (
               <div className="error-message">No schools match your search</div>
             )}
@@ -326,7 +327,7 @@ const TeacherIDLookup = () => {
                     setStep(2);
                   }}
                 >
-                  {school.schoolName} ({school.schoolState})
+                  {school.schoolName} ( {school.schoolCity}, {school.schoolState})
                 </button>
               </div>
             ))}
