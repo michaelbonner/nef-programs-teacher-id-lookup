@@ -25,6 +25,11 @@ const Container = styled.div`
     font-size: 24px;
   }
 
+  p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
   .progress-tracker {
     display: flex;
     justify-content: stretch;
