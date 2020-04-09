@@ -9,7 +9,7 @@ const Container = styled.div`
   max-width: 700px;
   width: 100%;
   color: #4a5568;
-  padding: 1rem;
+  padding: 2rem 1rem;
   margin: auto;
   box-sizing: border-box;
 
@@ -124,6 +124,10 @@ const Container = styled.div`
     display: block;
   }
 
+  .error-message {
+    color: #ed8936;
+  }
+
   .my-0 {
     margin-top: 0;
     margin-bottom: 0;
@@ -203,7 +207,7 @@ const TeacherIDLookup = () => {
 
     axios
       .get(
-        `https://nef-programs.test/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
+        `https://programs.nef1.org/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
       )
       .then(({ data }) => {
         setTeachers(data.data);
@@ -221,7 +225,7 @@ const TeacherIDLookup = () => {
     e.preventDefault();
     setIsSubmitting(true);
     axios
-      .get(`https://nef-programs.test/api/school.php?name=${schoolSearch}`)
+      .get(`https://programs.nef1.org/api/school.php?name=${schoolSearch}`)
       .then(({ data }) => {
         setSchools(
           data.data.sort(
@@ -236,6 +240,11 @@ const TeacherIDLookup = () => {
         setIsSubmitting(false);
       });
   };
+
+  useEffect(() => {
+    setSchools([]);
+  }, [schoolSearch]);
+
   return (
     <Container>
       <h2>Find Your Teacher ID</h2>
@@ -299,7 +308,7 @@ const TeacherIDLookup = () => {
           <div>
             {schools.length ? <p>Choose your teacher from the list</p> : ""}
             {schoolSearchState === "error" && (
-              <div>No schools match your search</div>
+              <div className="error-message">No schools match your search</div>
             )}
             {schools.map((school) => (
               <div key={school.schoolID}>
@@ -342,7 +351,7 @@ const TeacherIDLookup = () => {
 
           {teachers.length ? <p>Choose your teacher from the list</p> : ""}
           {teacherSearchState === "error" && (
-            <div>No teachers match your search</div>
+            <div className="error-message">No teachers match your search</div>
           )}
           {teachers.map((teacher) => (
             <div key={teacher.teacherID}>
