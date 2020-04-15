@@ -331,14 +331,18 @@ const TeacherIDLookup = () => {
                     setStep(2);
                   }}
                 >
-                  {school.schoolName} - {school.programShortDescription.replace('2020', '')} ( {school.schoolCity}, {school.schoolState})
+                  {school.schoolName} -{" "}
+                  {school.programShortDescription.replace(
+                    new Date().getFullYear(),
+                    ""
+                  )}{" "}
+                  ( {school.schoolCity}, {school.schoolState})
                 </button>
               </div>
             ))}
           </div>
         </form>
       )}
-
 
       {step === 2 && (
         <div>
