@@ -270,7 +270,7 @@ const TeacherIDLookup = () => {
           }}
           className="active"
         >
-          <strong>1</strong> <small>Find Your School:  </small>
+          <strong>1</strong> <small>Find Your School</small>
         </button>
         <button
           onClick={(e) => {
