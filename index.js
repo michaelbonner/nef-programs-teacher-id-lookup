@@ -297,7 +297,10 @@ const TeacherIDLookup = () => {
       {step === 1 && (
         <form className="school-search" onSubmit={searchForSchools}>
           <div>
-            <label htmlFor="schoolSearch">Enter the keyword of your school's name. Example - Kennedy for John F Kennedy</label>
+            <label htmlFor="schoolSearch">
+              Enter the keyword of your school's name. Example - Kennedy for
+              John F Kennedy
+            </label>
             <input
               id="schoolSearch"
               onChange={(e) => {
@@ -322,7 +325,7 @@ const TeacherIDLookup = () => {
               <div key={school.schoolID}>
                 <button
                   className="secondary"
-                    onClick={(e) => {
+                  onClick={(e) => {
                     e.preventDefault();
                     setSelectedSchool(school);
                     setStep(2);
