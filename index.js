@@ -216,6 +216,7 @@ const TeacherIDLookup = () => {
         `https://programs.nef1.org/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
       )
       .then(({ data }) => {
+        setTeacherSearchState("loaded");
         setTeachers(data.data);
       })
       .catch((response) => {
@@ -233,6 +234,7 @@ const TeacherIDLookup = () => {
     axios
       .get(`https://programs.nef1.org/api/school.php?name=${schoolSearch}`)
       .then(({ data }) => {
+        setSchoolSearchState("loaded");
         setSchools(
           data.data.sort(
             (a, b) => a.schoolName.toLowerCase() > b.schoolName.toLowerCase()
