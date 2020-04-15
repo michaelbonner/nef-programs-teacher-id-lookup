@@ -270,7 +270,7 @@ const TeacherIDLookup = () => {
           }}
           className="active"
         >
-          <strong>1</strong> <small>Find Your School - Enter the keyword of your school's name example - Kennedy for John F Kennedy</small>
+          <strong>1</strong> <small>Find Your School:  </small>
         </button>
         <button
           onClick={(e) => {
@@ -290,14 +290,14 @@ const TeacherIDLookup = () => {
           className={step > 2 ? "active" : ""}
           disabled={step < 3}
         >
-          <strong>3</strong> <small>Submit Your HEW</small>
+          <strong>3</strong> <small>Submit Your Form</small>
         </button>
       </div>
 
       {step === 1 && (
         <form className="school-search" onSubmit={searchForSchools}>
           <div>
-            <label htmlFor="schoolSearch">School Name</label>
+            <label htmlFor="schoolSearch">Enter the keyword of your school's name. Example - Kennedy for John F Kennedy</label>
             <input
               id="schoolSearch"
               onChange={(e) => {
@@ -328,7 +328,7 @@ const TeacherIDLookup = () => {
                     setStep(2);
                   }}
                 >
-                  {school.schoolName} ( {school.schoolCity}, {school.schoolState})
+                  {school.schoolName} - {school.programShortDescription.replace('2020', '')} ( {school.schoolCity}, {school.schoolState})
                 </button>
               </div>
             ))}
@@ -390,7 +390,7 @@ const TeacherIDLookup = () => {
             <a
               href={`https://hews.nef1.org/forms/show/${selectedTeacher.teacherID}`}
             >
-              Submit an HEW
+              Submit your form
             </a>
           </p>
         </div>
