@@ -216,6 +216,7 @@ const TeacherIDLookup = () => {
         `https://programs.nef1.org/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
       )
       .then(({ data }) => {
+        setTeacherSearchState("loaded");
         setTeachers(data.data);
       })
       .catch((response) => {
@@ -233,6 +234,7 @@ const TeacherIDLookup = () => {
     axios
       .get(`https://programs.nef1.org/api/school.php?name=${schoolSearch}`)
       .then(({ data }) => {
+        setSchoolSearchState("loaded");
         setSchools(
           data.data.sort(
             (a, b) => a.schoolName.toLowerCase() > b.schoolName.toLowerCase()
@@ -288,14 +290,17 @@ const TeacherIDLookup = () => {
           className={step > 2 ? "active" : ""}
           disabled={step < 3}
         >
-          <strong>3</strong> <small>Submit Your HEW</small>
+          <strong>3</strong> <small>Submit Your Form</small>
         </button>
       </div>
 
       {step === 1 && (
         <form className="school-search" onSubmit={searchForSchools}>
           <div>
-            <label htmlFor="schoolSearch">School Name</label>
+            <label htmlFor="schoolSearch">
+              Enter the keyword of your school's name. Example - Kennedy for
+              John F Kennedy
+            </label>
             <input
               id="schoolSearch"
               onChange={(e) => {
@@ -312,7 +317,7 @@ const TeacherIDLookup = () => {
             </button>
           </div>
           <div>
-            {schools.length ? <p>Choose your teacher from the list</p> : ""}
+            {schools.length ? <p>Choose from the list</p> : ""}
             {schoolSearchState === "error" && (
               <div className="error-message">No schools match your search</div>
             )}
@@ -326,7 +331,12 @@ const TeacherIDLookup = () => {
                     setStep(2);
                   }}
                 >
-                  {school.schoolName} ({school.schoolState})
+                  {school.schoolName} -{" "}
+                  {school.programShortDescription.replace(
+                    new Date().getFullYear(),
+                    ""
+                  )}{" "}
+                  ( {school.schoolCity}, {school.schoolState})
                 </button>
               </div>
             ))}
@@ -387,7 +397,7 @@ const TeacherIDLookup = () => {
             <a
               href={`https://hews.nef1.org/forms/show/${selectedTeacher.teacherID}`}
             >
-              Submit an HEW
+              Submit your form
             </a>
           </p>
         </div>
