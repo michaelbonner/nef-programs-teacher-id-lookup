@@ -334,7 +334,6 @@ const TeacherIDLookup = () => {
         </form>
       )}
 
-
       {step === 2 && (
         <div>
           <p className="my-6">
