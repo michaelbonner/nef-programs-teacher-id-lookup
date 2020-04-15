@@ -320,7 +320,7 @@ const TeacherIDLookup = () => {
               <div key={school.schoolID}>
                 <button
                   className="secondary"
-                  onClick={(e) => {
+                    onClick={(e) => {
                     e.preventDefault();
                     setSelectedSchool(school);
                     setStep(2);
@@ -333,6 +333,7 @@ const TeacherIDLookup = () => {
           </div>
         </form>
       )}
+
 
       {step === 2 && (
         <div>
