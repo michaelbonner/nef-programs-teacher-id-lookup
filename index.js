@@ -230,6 +230,7 @@ const TeacherIDLookup = () => {
 
   const searchForSchools = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsSubmitting(true);
     axios
       .get(`https://programs.nef1.org/api/school.php?name=${schoolSearch}`)
@@ -247,6 +248,7 @@ const TeacherIDLookup = () => {
       .finally(() => {
         setIsSubmitting(false);
       });
+    return false;
   };
 
   useEffect(() => {
@@ -261,6 +263,7 @@ const TeacherIDLookup = () => {
           type="button"
           onClick={(e) => {
             e.preventDefault();
+            e.stopPropagation();
             setStep(1);
             setTeacherSearch("");
             setSchoolSearch("");
@@ -277,6 +280,7 @@ const TeacherIDLookup = () => {
           type="button"
           onClick={(e) => {
             e.preventDefault();
+            e.stopPropagation();
             setStep(2);
             setTeacherSearch("");
             setSelectedTeacher(false);
@@ -331,6 +335,7 @@ const TeacherIDLookup = () => {
                   className="secondary"
                   onClick={(e) => {
                     e.preventDefault();
+                    e.stopPropagation();
                     setSelectedSchool(school);
                     setStep(2);
                   }}
@@ -380,6 +385,7 @@ const TeacherIDLookup = () => {
                 className="secondary"
                 onClick={(e) => {
                   e.preventDefault();
+                  e.stopPropagation();
                   setSelectedTeacher(teacher);
                   setStep(3);
                 }}
