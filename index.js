@@ -134,61 +134,9 @@ const Container = styled.div`
     color: #ed8936;
   }
 
-  .my-0 {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-  .my-1 {
-    margin-top: 0.25rem;
-    margin-bottom: 0.25rem;
-  }
-  .my-2 {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .my-3 {
-    margin-top: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-  .my-4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  .my-5 {
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
-  }
   .my-6 {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
-  }
-  .my-8 {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-  .my-10 {
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
-  .my-12 {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-  }
-  .my-16 {
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-  }
-  .my-20 {
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-  }
-  .my-24 {
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-  }
-  .my-32 {
-    margin-top: 8rem;
-    margin-bottom: 8rem;
   }
 `;
 
@@ -228,9 +176,7 @@ const TeacherIDLookup = () => {
       });
   }, [selectedSchool, teacherSearch]);
 
-  const searchForSchools = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const searchForSchools = () => {
     setIsSubmitting(true);
     axios
       .get(`https://programs.nef1.org/api/school.php?name=${schoolSearch}`)
@@ -263,7 +209,6 @@ const TeacherIDLookup = () => {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            e.stopPropagation();
             setStep(1);
             setTeacherSearch("");
             setSchoolSearch("");
@@ -280,7 +225,6 @@ const TeacherIDLookup = () => {
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            e.stopPropagation();
             setStep(2);
             setTeacherSearch("");
             setSelectedTeacher(false);
@@ -302,7 +246,7 @@ const TeacherIDLookup = () => {
       </div>
 
       {step === 1 && (
-        <form className="school-search" onSubmit={searchForSchools}>
+        <div className="school-search">
           <div>
             <label htmlFor="schoolSearch">
               Enter the keyword of your school's name. Example - Kennedy for
@@ -319,7 +263,12 @@ const TeacherIDLookup = () => {
             />
           </div>
           <div className={`${isSubmitting ? "opacity-25" : ""}`}>
-            <button type="button" disabled={isSubmitting} type="submit">
+            <button
+              type="button"
+              disabled={isSubmitting}
+              onClick={searchForSchools}
+              type="submit"
+            >
               Search for School
             </button>
           </div>
@@ -335,7 +284,6 @@ const TeacherIDLookup = () => {
                   className="secondary"
                   onClick={(e) => {
                     e.preventDefault();
-                    e.stopPropagation();
                     setSelectedSchool(school);
                     setStep(2);
                   }}
@@ -350,7 +298,7 @@ const TeacherIDLookup = () => {
               </div>
             ))}
           </div>
-        </form>
+        </div>
       )}
 
       {step === 2 && (
@@ -385,7 +333,6 @@ const TeacherIDLookup = () => {
                 className="secondary"
                 onClick={(e) => {
                   e.preventDefault();
-                  e.stopPropagation();
                   setSelectedTeacher(teacher);
                   setStep(3);
                 }}
