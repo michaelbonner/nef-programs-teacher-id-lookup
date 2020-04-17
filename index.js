@@ -258,6 +258,7 @@ const TeacherIDLookup = () => {
       <h2>Find Your Teacher ID</h2>
       <div className="progress-tracker">
         <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             setStep(1);
@@ -273,6 +274,7 @@ const TeacherIDLookup = () => {
           <strong>1</strong> <small>Find Your School</small>
         </button>
         <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             setStep(2);
@@ -286,6 +288,7 @@ const TeacherIDLookup = () => {
           <strong>2</strong> <small>Find Your Teacher</small>
         </button>
         <button
+          type="button"
           onClick={(e) => e.preventDefault()}
           className={step > 2 ? "active" : ""}
           disabled={step < 3}
@@ -312,7 +315,7 @@ const TeacherIDLookup = () => {
             />
           </div>
           <div className={`${isSubmitting ? "opacity-25" : ""}`}>
-            <button disabled={isSubmitting} type="submit">
+            <button type="button" disabled={isSubmitting} type="submit">
               Search for School
             </button>
           </div>
@@ -324,6 +327,7 @@ const TeacherIDLookup = () => {
             {schools.map((school) => (
               <div key={school.schoolID}>
                 <button
+                  type="button"
                   className="secondary"
                   onClick={(e) => {
                     e.preventDefault();
@@ -372,6 +376,7 @@ const TeacherIDLookup = () => {
           {teachers.map((teacher) => (
             <div key={teacher.teacherID}>
               <button
+                type="button"
                 className="secondary"
                 onClick={(e) => {
                   e.preventDefault();
