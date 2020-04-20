@@ -304,8 +304,8 @@ const TeacherIDLookup = () => {
       {step === 2 && (
         <div>
           <p className="my-6">
-            Great! Now we know your at{" "}
-            <strong>{selectedSchool.schoolName}</strong>. Now tell use which
+            Great! Now we know you're at{" "}
+            <strong>{selectedSchool.schoolName}</strong>. Now tell us which
             teacher you have.
           </p>
 
