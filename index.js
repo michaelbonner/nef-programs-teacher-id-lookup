@@ -203,7 +203,7 @@ const TeacherIDLookup = () => {
 
   return (
     <Container>
-      <h2>Find Your Teacher ID</h2>
+      <h2>Find your teacher ID</h2>
       <div className="progress-tracker">
         <button
           type="button"
@@ -219,7 +219,7 @@ const TeacherIDLookup = () => {
           }}
           className="active"
         >
-          <strong>1</strong> <small>Find Your School</small>
+          <strong>1</strong> <small>Find your school</small>
         </button>
         <button
           type="button"
@@ -233,7 +233,7 @@ const TeacherIDLookup = () => {
           className={step > 1 ? "active" : ""}
           disabled={step < 2}
         >
-          <strong>2</strong> <small>Find Your Teacher</small>
+          <strong>2</strong> <small>Find your teacher</small>
         </button>
         <button
           type="button"
@@ -241,7 +241,7 @@ const TeacherIDLookup = () => {
           className={step > 2 ? "active" : ""}
           disabled={step < 3}
         >
-          <strong>3</strong> <small>Submit Your Form</small>
+          <strong>3</strong> <small>Submit your form</small>
         </button>
       </div>
 
