@@ -167,7 +167,6 @@ const TeacherIDLookup = ({ version }) => {
     axios
       .get(endpoint)
       .then(({ data }) => {
-        console.log("data.data", data.data);
         setTeacherSearchState("loaded");
         setTeachers(data.data);
       })
@@ -367,13 +366,23 @@ const TeacherIDLookup = ({ version }) => {
           </h3>
           <p>Teacher ID: {selectedTeacher.teacherID || selectedTeacher.id}</p>
           <p>
-            <a
-              href={`https://worksheets.nef1.org/forms/show/${
-                selectedTeacher.teacherID || selectedTeacher.id
-              }`}
-            >
-              Submit your form
-            </a>
+            {selectedTeacher.teacherID ? (
+              <a
+                href={`https://hews.nef1.org/forms/show/${
+                  selectedTeacher.teacherID || selectedTeacher.id
+                }`}
+              >
+                Submit your form
+              </a>
+            ) : (
+              <a
+                href={`https://worksheets.nef1.org/forms/show/${
+                  selectedTeacher.teacherID || selectedTeacher.id
+                }`}
+              >
+                Submit your form
+              </a>
+            )}
           </p>
         </div>
       )}
