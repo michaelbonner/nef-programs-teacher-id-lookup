@@ -140,7 +140,7 @@ const Container = styled.div`
   }
 `;
 
-const TeacherIDLookup = () => {
+const TeacherIDLookup = ({ version }) => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [schoolSearch, setSchoolSearch] = useState("");
@@ -159,11 +159,15 @@ const TeacherIDLookup = () => {
       return;
     }
 
+    const endpoint =
+      parseInt(version) === 1
+        ? `https://programs.nef1.org/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
+        : `http://api.programs.nef1.org/api/open/teacher-search?school_id=${selectedSchool.id}&last_name=${teacherSearch}`;
+
     axios
-      .get(
-        `https://programs.nef1.org/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
-      )
+      .get(endpoint)
       .then(({ data }) => {
+        console.log("data.data", data.data);
         setTeacherSearchState("loaded");
         setTeachers(data.data);
       })
@@ -178,13 +182,20 @@ const TeacherIDLookup = () => {
 
   const searchForSchools = () => {
     setIsSubmitting(true);
+
+    const endpoint =
+      parseInt(version) === 1
+        ? `https://programs.nef1.org/api/school.php?name=${schoolSearch}`
+        : `http://api.programs.nef1.org/api/open/school-search?search=${schoolSearch}`;
+
+    const nameKey = parseInt(version) === 1 ? "schoolName" : "name";
     axios
-      .get(`https://programs.nef1.org/api/school.php?name=${schoolSearch}`)
+      .get(endpoint)
       .then(({ data }) => {
         setSchoolSearchState("loaded");
         setSchools(
           data.data.sort(
-            (a, b) => a.schoolName.toLowerCase() > b.schoolName.toLowerCase()
+            (a, b) => a[nameKey].toLowerCase() > b[nameKey].toLowerCase()
           )
         );
       })
@@ -278,7 +289,7 @@ const TeacherIDLookup = () => {
               <div className="error-message">No schools match your search</div>
             )}
             {schools.map((school) => (
-              <div key={school.schoolID}>
+              <div key={school.schoolID || school.id}>
                 <button
                   type="button"
                   className="secondary"
@@ -288,12 +299,15 @@ const TeacherIDLookup = () => {
                     setStep(2);
                   }}
                 >
-                  {school.schoolName} -{" "}
-                  {school.programShortDescription.replace(
-                    new Date().getFullYear(),
-                    ""
-                  )}{" "}
-                  ( {school.schoolCity}, {school.schoolState})
+                  {school.schoolName || school.name} -{" "}
+                  {school.programShortDescription
+                    ? school.programShortDescription.replace(
+                        new Date().getFullYear(),
+                        ""
+                      )
+                    : school.program_name}{" "}
+                  ({school.schoolCity || school.city},{" "}
+                  {school.schoolState || school.state})
                 </button>
               </div>
             ))}
@@ -327,7 +341,7 @@ const TeacherIDLookup = () => {
             <div className="error-message">No teachers match your search</div>
           )}
           {teachers.map((teacher) => (
-            <div key={teacher.teacherID}>
+            <div key={teacher.teacherID || teacher.id}>
               <button
                 type="button"
                 className="secondary"
@@ -337,7 +351,8 @@ const TeacherIDLookup = () => {
                   setStep(3);
                 }}
               >
-                {teacher.teacherLastName}, {teacher.teacherFirstName}
+                {teacher.teacherLastName || teacher.last_name},{" "}
+                {teacher.teacherFirstName || teacher.first_name}
               </button>
             </div>
           ))}
@@ -347,13 +362,15 @@ const TeacherIDLookup = () => {
       {step === 3 && (
         <div className="teacher-box">
           <h3>
-            {selectedTeacher.teacherLastName},{" "}
-            {selectedTeacher.teacherFirstName}
+            {selectedTeacher.teacherLastName || selectedTeacher.last_name},{" "}
+            {selectedTeacher.teacherFirstName || selectedTeacher.first_name}
           </h3>
-          <p>Teacher ID: {selectedTeacher.teacherID}</p>
+          <p>Teacher ID: {selectedTeacher.teacherID || selectedTeacher.id}</p>
           <p>
             <a
-              href={`https://hews.nef1.org/forms/show/${selectedTeacher.teacherID}`}
+              href={`https://worksheets.nef1.org/forms/show/${
+                selectedTeacher.teacherID || selectedTeacher.id
+              }`}
             >
               Submit your form
             </a>
@@ -364,7 +381,10 @@ const TeacherIDLookup = () => {
   );
 };
 
+var teacherIdContainer = document.getElementById(
+  "NEF_Programs_Teacher_ID_Lookup_app"
+);
 ReactDOM.render(
-  <TeacherIDLookup />,
-  document.getElementById("NEF_Programs_Teacher_ID_Lookup_app")
+  <TeacherIDLookup version={teacherIdContainer.getAttribute("version")} />,
+  teacherIdContainer
 );
