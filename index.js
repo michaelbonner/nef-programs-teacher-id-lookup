@@ -162,7 +162,7 @@ const TeacherIDLookup = ({ version }) => {
     const endpoint =
       parseInt(version) === 1
         ? `https://programs.nef1.org/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
-        : `http://api.programs.nef1.org/api/open/teacher-search?school_id=${selectedSchool.id}&last_name=${teacherSearch}`;
+        : `https://api.programs.nef1.org/api/open/teacher-search?school_id=${selectedSchool.id}&last_name=${teacherSearch}`;
 
     axios
       .get(endpoint)
@@ -185,7 +185,7 @@ const TeacherIDLookup = ({ version }) => {
     const endpoint =
       parseInt(version) === 1
         ? `https://programs.nef1.org/api/school.php?name=${schoolSearch}`
-        : `http://api.programs.nef1.org/api/open/school-search?search=${schoolSearch}`;
+        : `https://api.programs.nef1.org/api/open/school-search?search=${schoolSearch}`;
 
     const nameKey = parseInt(version) === 1 ? "schoolName" : "name";
     axios
