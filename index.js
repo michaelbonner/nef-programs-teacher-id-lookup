@@ -197,6 +197,9 @@ const TeacherIDLookup = ({ version }) => {
             (a, b) => a[nameKey].toLowerCase() > b[nameKey].toLowerCase()
           )
         );
+        if (!data.data.length) {
+          setSchoolSearchState("error");
+        }
       })
       .catch((response) => {
         setSchoolSearchState("error");
@@ -272,10 +275,14 @@ const TeacherIDLookup = ({ version }) => {
               value={schoolSearch}
             />
           </div>
-          <div className={`${isSubmitting ? "opacity-25" : ""}`}>
+          <div
+            className={`${
+              isSubmitting || schoolSearch === "" ? "opacity-25" : ""
+            }`}
+          >
             <button
               type="button"
-              disabled={isSubmitting}
+              disabled={isSubmitting || schoolSearch === ""}
               onClick={searchForSchools}
               type="submit"
             >
