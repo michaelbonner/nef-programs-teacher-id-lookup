@@ -28,6 +28,8 @@ add_shortcode('nef_programs_teacher_id_lookup', function ($attributes) {
     wp_enqueue_script('polyfill_io', 'https://cdn.polyfill.io/v2/polyfill.min.js', [], '', false);
     wp_enqueue_script('nef_programs_teacher_id_lookup', plugins_url('dist/nef-programs-teacher-id-lookup.e31bb0bc.js', __FILE__), [], '', true);
 ?>
-    <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>">Loading...</div>
+    <div>
+        <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>">Loading...</div>
+    </div>
 <?php
 });
