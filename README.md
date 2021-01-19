@@ -16,3 +16,11 @@
 
 1. Use ssh to connect to the server instance
 1. `git pull` the plugin
+
+## Use the shortcode
+
+1. Add the shortcode `[nef_programs_teacher_id_lookup version="2"]` where you would like to have the plugin show
+
+```
+Note: remove version="2" if you are using the legacy registration suite
+```
