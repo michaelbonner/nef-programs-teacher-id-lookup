@@ -8,7 +8,7 @@ const Container = styled.div`
   font-size: 1.2em;
   max-width: 700px;
   width: 100%;
-  color: #4a5568;
+  color: var(--nef-teacher-lookup-text-color);
   padding: 2rem 1rem;
   margin: auto;
   box-sizing: border-box;
@@ -37,9 +37,9 @@ const Container = styled.div`
 
     button {
       font-size: 1.2rem;
-      color: #a0aec0;
-      background-color: white;
-      border: thin solid white;
+      color: var(--nef-teacher-lookup-light-color);
+      background-color: var(--nef-teacher-lookup-accent-color);
+      border: thin solid var(--nef-teacher-lookup-accent-color);
       appearance: none;
       padding: 0.5rem 0.75rem;
       flex: 1 1 0%;
@@ -47,8 +47,8 @@ const Container = styled.div`
     }
 
     .active {
-      color: #38b2ac;
-      border-bottom: thin solid #38b2ac;
+      color: var(--nef-teacher-lookup-base-color);
+      border-bottom: thin solid var(--nef-teacher-lookup-base-color);
     }
   }
 
@@ -57,8 +57,8 @@ const Container = styled.div`
   }
 
   .teacher-box {
-    background: white;
-    border: thin solid #a0aec0;
+    background: var(--nef-teacher-lookup-accent-color);
+    border: thin solid var(--nef-teacher-lookup-light-color);
     margin-top: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -74,8 +74,8 @@ const Container = styled.div`
   }
 
   input {
-    background: white;
-    border: thin solid #a0aec0;
+    background: var(--nef-teacher-lookup-accent-color);
+    border: thin solid var(--nef-teacher-lookup-light-color);
     border-radius: 0.5rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -96,7 +96,7 @@ const Container = styled.div`
   button[type="submit"] {
     margin-top: 1.5rem;
     border: none;
-    color: white;
+    color: var(--nef-teacher-lookup-accent-color);
 
     padding: 1rem 1.25rem;
     font-size: 1.125rem;
@@ -105,7 +105,7 @@ const Container = styled.div`
     line-height: 1.25;
     font-weight: 600;
     border-radius: 0.5rem;
-    background-color: #38b2ac;
+    background-color: var(--nef-teacher-lookup-base-color);
   }
 
   button.secondary {
@@ -118,8 +118,8 @@ const Container = styled.div`
     line-height: 1.25;
     font-weight: 600;
     border-radius: 0.5rem;
-    background-color: white;
-    color: #38b2ac;
+    background-color: var(--nef-teacher-lookup-accent-color);
+    color: var(--nef-teacher-lookup-base-color);
   }
 
   .opacity-25 {
@@ -131,7 +131,7 @@ const Container = styled.div`
   }
 
   .error-message {
-    color: #ed8936;
+    color: var(--nef-teacher-lookup-error-color);
   }
 
   .my-6 {
@@ -215,7 +215,7 @@ const TeacherIDLookup = ({ version }) => {
   }, [schoolSearch]);
 
   return (
-    <Container>
+    <Container id="teacher_id_lookup_container">
       <h2>Find your teacher ID</h2>
       <div className="progress-tracker">
         <button
