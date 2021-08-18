@@ -23,19 +23,45 @@ if (!defined('WPINC')) {
 }
 
 
-add_shortcode('nef_programs_teacher_id_lookup', function ($attributes) {
-    $version = !empty($attributes['version']) ? (int) $attributes['version'] : 1;
-    $programId = !empty($attributes['programId']) ? (int) $attributes['programId'] : '*';
-    $programJobCode = !empty($attributes['programJobCode']) ? $attributes['programJobCode'] : '*';
-    $year = !empty($attributes['year']) ? (int) $attributes['year'] : '*';
-    wp_enqueue_script('polyfill_io', 'https://cdn.polyfill.io/v2/polyfill.min.js', [], '', false);
-    wp_enqueue_script('nef_programs_teacher_id_lookup', plugins_url('dist/nef-programs-teacher-id-lookup.e31bb0bc.js', __FILE__), [], '', true);
-    ob_start();
+add_shortcode(
+    'nef_programs_teacher_id_lookup',
+    function ($attributes) {
+        $version = !empty($attributes['version']) ?
+            (int) $attributes['version'] :
+            1;
+        $programId = !empty($attributes['programId']) ?
+            (int) $attributes['programId'] :
+            '*';
+        $programJobCode = !empty($attributes['programJobCode']) ?
+            $attributes['programJobCode'] :
+            '*';
+        $year = !empty($attributes['year']) ?
+            (int) $attributes['year'] :
+            '*';
+        wp_enqueue_script(
+            'polyfill_io',
+            'https://cdn.polyfill.io/v2/polyfill.min.js',
+            [],
+            '',
+            false
+        );
+        wp_enqueue_script(
+            'nef_programs_teacher_id_lookup',
+            plugins_url(
+                'dist/nef-programs-teacher-id-lookup.e31bb0bc.js',
+                __FILE__
+            ),
+            [],
+            '',
+            true
+        );
+        ob_start();
 ?>
-    <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>" programId="<?= $programId ?>" year="<?= $year ?>" programJobCode="<?= $programJobCode ?>">Loading...</div>
+    <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>" programid="<?= $programId ?>" year="<?= $year ?>" programjobcode="<?= $programJobCode ?>">Loading...</div>
 <?php
-    return ob_get_clean();
-});
+        return ob_get_clean();
+    }
+);
 
 
 add_action('wp_head', function () {
