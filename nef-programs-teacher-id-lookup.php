@@ -57,7 +57,7 @@ add_shortcode(
         );
         ob_start();
 ?>
-    <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>" programid="<?= $programId ?>" year="<?= $year ?>" programjobcode="<?= $programJobCode ?>">Loading...</div>
+    <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>" program_id="<?= $programId ?>" year="<?= $year ?>" program_job_code="<?= $programJobCode ?>">Loading...</div>
 <?php
         return ob_get_clean();
     }
