@@ -25,6 +25,17 @@
 Note: remove version="2" if you are using the legacy registration suite
 ```
 
+## Options
+
+- Program ID
+  - `[nef_programs_teacher_id_lookup version="2" programId="123"]`
+- Job Code
+  - `[nef_programs_teacher_id_lookup version="2" programJobCode="abc-xyz"]`
+- Year
+  - `[nef_programs_teacher_id_lookup version="2" year="2021"]`
+- Job Code and Year
+  - `[nef_programs_teacher_id_lookup version="2" programJobCode="abc-xyz" year="2021"]`
+
 ## Overriding colors
 
 We are using CSS custom properties to allow overriding the default colors. You can use the following in your own CSS.
