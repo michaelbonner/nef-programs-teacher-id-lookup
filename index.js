@@ -140,7 +140,7 @@ const Container = styled.div`
   }
 `;
 
-const TeacherIDLookup = ({ version, programId, year }) => {
+const TeacherIDLookup = ({ version, programId, programJobCode, year }) => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [schoolSearch, setSchoolSearch] = useState("");
@@ -152,8 +152,10 @@ const TeacherIDLookup = ({ version, programId, year }) => {
   const [teachers, setTeachers] = useState([]);
   const [selectedTeacher, setSelectedTeacher] = useState(false);
 
-  const apiBaseUrl = `https://api.programs.nef1.org/api/open/`;
-  // const apiBaseUrl = `http://localhost/api/open/`;
+  const apiBaseUrl =
+    location.hostname === "localhost"
+      ? `http://localhost/api/open/`
+      : `https://api.programs.nef1.org/api/open/`;
 
   useEffect(() => {
     if (!teacherSearch || teacherSearch.length < 2) {
@@ -188,7 +190,7 @@ const TeacherIDLookup = ({ version, programId, year }) => {
     const endpoint =
       parseInt(version) === 1
         ? `https://programs.nef1.org/api/school.php?name=${schoolSearch}`
-        : `${apiBaseUrl}school-search?search=${schoolSearch}&programId=${programId}&year=${year}`;
+        : `${apiBaseUrl}school-search?search=${schoolSearch}&programId=${programId}&programJobCode=${programJobCode}&year=${year}`;
 
     const nameKey = parseInt(version) === 1 ? "schoolName" : "name";
     axios
@@ -302,30 +304,38 @@ const TeacherIDLookup = ({ version, programId, year }) => {
             {schoolSearchState === "error" && (
               <div className="error-message">No schools match your search</div>
             )}
-            {schools.map((school) => (
-              <div key={school.schoolID || school.id}>
-                <button
-                  type="button"
-                  className="secondary"
-                  data-id={school.schoolID || school.id}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSelectedSchool(school);
-                    setStep(2);
-                  }}
-                >
-                  {school.schoolName || school.name} -{" "}
-                  {school.programShortDescription
-                    ? school.programShortDescription.replace(
-                        new Date().getFullYear(),
-                        ""
-                      )
-                    : school.program_name}{" "}
-                  ({school.schoolCity || school.city},{" "}
-                  {school.schoolState || school.state})
-                </button>
-              </div>
-            ))}
+            {schools.map((school) => {
+              const schoolId = school.schoolID || school.id;
+              const schoolName = school.schoolName || school.name;
+              const programName = school.programShortDescription
+                ? school.programShortDescription.replace(
+                    new Date().getFullYear(),
+                    ""
+                  )
+                : school.program_name;
+              const schoolCity = school.schoolCity || school.city;
+              const schoolState = school.schoolState || school.state;
+
+              return (
+                <div key={schoolId}>
+                  <button
+                    type="button"
+                    className="secondary"
+                    data-id={schoolId}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setSelectedSchool(school);
+                      setStep(2);
+                    }}
+                  >
+                    {schoolName} - {programName}
+                    {schoolCity && schoolState
+                      ? ` (${schoolCity}, ${schoolState})`
+                      : ""}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -410,6 +420,7 @@ ReactDOM.render(
   <TeacherIDLookup
     version={teacherIdContainer.getAttribute("version")}
     programId={teacherIdContainer.getAttribute("programId")}
+    programJobCode={teacherIdContainer.getAttribute("programJobCode")}
     year={teacherIdContainer.getAttribute("year")}
   />,
   teacherIdContainer

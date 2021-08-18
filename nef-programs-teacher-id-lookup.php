@@ -8,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       NEF Programs Teacher ID Lookup
  * Plugin URI:        https://nef1.org
- * Description:       Adds a shortcode to look up teacher IDs by school. Use the shortcode <code>[nef_programs_teacher_id_lookup]</code> to embed the plugin. You can also pass programId="123" or year="2021" as parameters.
+ * Description:       Adds a shortcode to look up teacher IDs by school. Use the shortcode <code>[nef_programs_teacher_id_lookup]</code> to embed the plugin. You can also pass programId="123", programJobCode="abc-ta", or year="2021" as parameters.
  * Version:           1.0.0
  * Author:            Michael Bonner
  * Author URI:        https://bootpackdigital.com
@@ -26,12 +26,13 @@ if (!defined('WPINC')) {
 add_shortcode('nef_programs_teacher_id_lookup', function ($attributes) {
     $version = !empty($attributes['version']) ? (int) $attributes['version'] : 1;
     $programId = !empty($attributes['programId']) ? (int) $attributes['programId'] : '*';
+    $programJobCode = !empty($attributes['programJobCode']) ? (int) $attributes['programJobCode'] : '*';
     $year = !empty($attributes['year']) ? (int) $attributes['year'] : '*';
     wp_enqueue_script('polyfill_io', 'https://cdn.polyfill.io/v2/polyfill.min.js', [], '', false);
     wp_enqueue_script('nef_programs_teacher_id_lookup', plugins_url('dist/nef-programs-teacher-id-lookup.e31bb0bc.js', __FILE__), [], '', true);
     ob_start();
 ?>
-    <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>" programId="<?= $programId ?>" year="<?= $year ?>">Loading...</div>
+    <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>" programId="<?= $programId ?>" year="<?= $year ?>" programJobCode="<?= $programJobCode ?>">Loading...</div>
 <?php
     return ob_get_clean();
 });
