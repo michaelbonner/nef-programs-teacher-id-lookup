@@ -140,7 +140,7 @@ const Container = styled.div`
   }
 `;
 
-const TeacherIDLookup = ({ version }) => {
+const TeacherIDLookup = ({ version, programId, year }) => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [schoolSearch, setSchoolSearch] = useState("");
@@ -152,6 +152,9 @@ const TeacherIDLookup = ({ version }) => {
   const [teachers, setTeachers] = useState([]);
   const [selectedTeacher, setSelectedTeacher] = useState(false);
 
+  const apiBaseUrl = `https://api.programs.nef1.org/api/open/`;
+  // const apiBaseUrl = `http://localhost/api/open/`;
+
   useEffect(() => {
     if (!teacherSearch || teacherSearch.length < 2) {
       setTeacherSearchState("initial");
@@ -162,7 +165,7 @@ const TeacherIDLookup = ({ version }) => {
     const endpoint =
       parseInt(version) === 1
         ? `https://programs.nef1.org/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
-        : `https://api.programs.nef1.org/api/open/teacher-search?school_id=${selectedSchool.id}&last_name=${teacherSearch}`;
+        : `${apiBaseUrl}teacher-search?school_id=${selectedSchool.id}&last_name=${teacherSearch}`;
 
     axios
       .get(endpoint)
@@ -185,7 +188,7 @@ const TeacherIDLookup = ({ version }) => {
     const endpoint =
       parseInt(version) === 1
         ? `https://programs.nef1.org/api/school.php?name=${schoolSearch}`
-        : `https://api.programs.nef1.org/api/open/school-search?search=${schoolSearch}`;
+        : `${apiBaseUrl}school-search?search=${schoolSearch}&programId=${programId}&year=${year}`;
 
     const nameKey = parseInt(version) === 1 ? "schoolName" : "name";
     axios
@@ -270,6 +273,11 @@ const TeacherIDLookup = ({ version }) => {
               onChange={(e) => {
                 setSchoolSearch(e.target.value);
               }}
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  searchForSchools();
+                }
+              }}
               placeholder="School Name"
               type="text"
               value={schoolSearch}
@@ -299,6 +307,7 @@ const TeacherIDLookup = ({ version }) => {
                 <button
                   type="button"
                   className="secondary"
+                  data-id={school.schoolID || school.id}
                   onClick={(e) => {
                     e.preventDefault();
                     setSelectedSchool(school);
@@ -323,10 +332,7 @@ const TeacherIDLookup = ({ version }) => {
 
       {step === 2 && (
         <div>
-          <p className="my-6">
-            Great! Now tell us which
-            teacher you have.
-          </p>
+          <p className="my-6">Great! Now tell us which teacher you have.</p>
 
           <div>
             <label htmlFor="teacherSearch">Teacher Last Name</label>
@@ -348,6 +354,7 @@ const TeacherIDLookup = ({ version }) => {
           {teachers.map((teacher) => (
             <div key={teacher.teacherID || teacher.id}>
               <button
+                data-id={teacher.teacherID || teacher.id}
                 type="button"
                 className="secondary"
                 onClick={(e) => {
@@ -400,6 +407,10 @@ var teacherIdContainer = document.getElementById(
   "NEF_Programs_Teacher_ID_Lookup_app"
 );
 ReactDOM.render(
-  <TeacherIDLookup version={teacherIdContainer.getAttribute("version")} />,
+  <TeacherIDLookup
+    version={teacherIdContainer.getAttribute("version")}
+    programId={teacherIdContainer.getAttribute("programId")}
+    year={teacherIdContainer.getAttribute("year")}
+  />,
   teacherIdContainer
 );
