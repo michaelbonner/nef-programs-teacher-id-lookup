@@ -419,8 +419,8 @@ var teacherIdContainer = document.getElementById(
 ReactDOM.render(
   <TeacherIDLookup
     version={teacherIdContainer.getAttribute("version")}
-    programId={teacherIdContainer.getAttribute("programId")}
-    programJobCode={teacherIdContainer.getAttribute("programJobCode")}
+    programId={teacherIdContainer.getAttribute("program_id")}
+    programJobCode={teacherIdContainer.getAttribute("program_job_code")}
     year={teacherIdContainer.getAttribute("year")}
   />,
   teacherIdContainer

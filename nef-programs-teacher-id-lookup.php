@@ -29,11 +29,11 @@ add_shortcode(
         $version = !empty($attributes['version']) ?
             (int) $attributes['version'] :
             1;
-        $programId = !empty($attributes['programId']) ?
-            (int) $attributes['programId'] :
+        $programId = !empty($attributes['program_id']) ?
+            (int) $attributes['program_id'] :
             '*';
-        $programJobCode = !empty($attributes['programJobCode']) ?
-            $attributes['programJobCode'] :
+        $programJobCode = !empty($attributes['program_job_code']) ?
+            $attributes['program_job_code'] :
             '*';
         $year = !empty($attributes['year']) ?
             (int) $attributes['year'] :
