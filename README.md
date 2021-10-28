@@ -19,22 +19,18 @@
 
 ## Use the shortcode
 
-1. Add the shortcode `[nef_programs_teacher_id_lookup version="2"]` where you would like to have the plugin show
-
-```
-Note: remove version="2" if you are using the legacy registration suite
-```
+1. Add the shortcode `[nef_programs_teacher_id_lookup]` where you would like to have the plugin show
 
 ## Options
 
 - Program ID
-  - `[nef_programs_teacher_id_lookup version="2" program_id="123"]`
+  - `[nef_programs_teacher_id_lookup program_id="123"]`
 - Job Code
-  - `[nef_programs_teacher_id_lookup version="2" program_job_code="abc-xyz"]`
+  - `[nef_programs_teacher_id_lookup program_job_code="abc-xyz"]`
 - Year
-  - `[nef_programs_teacher_id_lookup version="2" year="2021"]`
+  - `[nef_programs_teacher_id_lookup year="2021"]`
 - Job Code and Year
-  - `[nef_programs_teacher_id_lookup version="2" program_job_code="abc-xyz" year="2021"]`
+  - `[nef_programs_teacher_id_lookup program_job_code="abc-xyz" year="2021"]`
 
 ## Overriding colors
 

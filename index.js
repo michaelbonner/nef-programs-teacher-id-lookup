@@ -140,7 +140,7 @@ const Container = styled.div`
   }
 `;
 
-const TeacherIDLookup = ({ version, programId, programJobCode, year }) => {
+const TeacherIDLookup = ({ programId, programJobCode, year }) => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [schoolSearch, setSchoolSearch] = useState("");
@@ -164,10 +164,7 @@ const TeacherIDLookup = ({ version, programId, programJobCode, year }) => {
       return;
     }
 
-    const endpoint =
-      parseInt(version) === 1
-        ? `https://programs.nef1.org/api/teacher.php?schoolId=${selectedSchool.schoolID}&name=${teacherSearch}`
-        : `${apiBaseUrl}teacher-search?school_id=${selectedSchool.id}&last_name=${teacherSearch}`;
+    const endpoint = `${apiBaseUrl}teacher-search?school_id=${selectedSchool.id}&last_name=${teacherSearch}`;
 
     axios
       .get(endpoint)
@@ -187,12 +184,9 @@ const TeacherIDLookup = ({ version, programId, programJobCode, year }) => {
   const searchForSchools = () => {
     setIsSubmitting(true);
 
-    const endpoint =
-      parseInt(version) === 1
-        ? `https://programs.nef1.org/api/school.php?name=${schoolSearch}`
-        : `${apiBaseUrl}school-search?search=${schoolSearch}&programId=${programId}&programJobCode=${programJobCode}&year=${year}`;
+    const endpoint = `${apiBaseUrl}school-search?search=${schoolSearch}&programId=${programId}&programJobCode=${programJobCode}&year=${year}`;
 
-    const nameKey = parseInt(version) === 1 ? "schoolName" : "name";
+    const nameKey = "name";
     axios
       .get(endpoint)
       .then(({ data }) => {
@@ -418,7 +412,6 @@ var teacherIdContainer = document.getElementById(
 );
 ReactDOM.render(
   <TeacherIDLookup
-    version={teacherIdContainer.getAttribute("version")}
     programId={teacherIdContainer.getAttribute("program_id")}
     programJobCode={teacherIdContainer.getAttribute("program_job_code")}
     year={teacherIdContainer.getAttribute("year")}

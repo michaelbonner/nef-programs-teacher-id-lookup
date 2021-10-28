@@ -26,9 +26,6 @@ if (!defined('WPINC')) {
 add_shortcode(
     'nef_programs_teacher_id_lookup',
     function ($attributes) {
-        $version = !empty($attributes['version']) ?
-            (int) $attributes['version'] :
-            1;
         $programId = !empty($attributes['program_id']) ?
             (int) $attributes['program_id'] :
             '*';
@@ -48,7 +45,7 @@ add_shortcode(
         wp_enqueue_script(
             'nef_programs_teacher_id_lookup',
             plugins_url(
-                'dist/nef-programs-teacher-id-lookup.e31bb0bc.js',
+                'dist/index.174f71e2.js',
                 __FILE__
             ),
             [],
@@ -57,7 +54,7 @@ add_shortcode(
         );
         ob_start();
 ?>
-    <div id="NEF_Programs_Teacher_ID_Lookup_app" version="<?= $version ?>" program_id="<?= $programId ?>" year="<?= $year ?>" program_job_code="<?= $programJobCode ?>">Loading...</div>
+    <div id="NEF_Programs_Teacher_ID_Lookup_app" program_id="<?= $programId ?>" year="<?= $year ?>" program_job_code="<?= $programJobCode ?>">Loading...</div>
 <?php
         return ob_get_clean();
     }
