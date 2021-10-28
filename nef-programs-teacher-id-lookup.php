@@ -48,7 +48,7 @@ add_shortcode(
                 'dist/index.174f71e2.js',
                 __FILE__
             ),
-            ['jQuery'],
+            [],
             '',
             true
         );
