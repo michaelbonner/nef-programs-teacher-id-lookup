@@ -410,11 +410,13 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
 var teacherIdContainer = document.getElementById(
   "NEF_Programs_Teacher_ID_Lookup_app"
 );
-ReactDOM.render(
-  <TeacherIDLookup
-    programId={teacherIdContainer.getAttribute("program_id")}
-    programJobCode={teacherIdContainer.getAttribute("program_job_code")}
-    year={teacherIdContainer.getAttribute("year")}
-  />,
-  teacherIdContainer
-);
+if (teacherIdContainer) {
+  ReactDOM.render(
+    <TeacherIDLookup
+      programId={teacherIdContainer.getAttribute("program_id")}
+      programJobCode={teacherIdContainer.getAttribute("program_job_code")}
+      year={teacherIdContainer.getAttribute("year")}
+    />,
+    teacherIdContainer
+  );
+}
