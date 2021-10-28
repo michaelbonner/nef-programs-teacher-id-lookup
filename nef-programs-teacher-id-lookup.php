@@ -45,7 +45,7 @@ add_shortcode(
         wp_enqueue_script(
             'nef_programs_teacher_id_lookup',
             plugins_url(
-                'dist/index.174f71e2.js',
+                'dist/index.80b8afc8.js',
                 __FILE__
             ),
             [],
