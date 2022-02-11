@@ -8,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       NEF Programs Teacher ID Lookup
  * Plugin URI:        https://nef1.org
- * Description:       Adds a shortcode to look up teacher IDs by school. Use the shortcode <code>[nef_programs_teacher_id_lookup]</code> to embed the plugin. You can also pass programId="123", programJobCode="abc-ta", or year="2021" as parameters.
+ * Description:       Adds a shortcode to look up teacher IDs by school. Use the shortcode <code>[nef_programs_teacher_id_lookup]</code> to embed the plugin. You can also pass programId="123", programJobCode="abc-ta" (or "abc-ta,def-bk" for multiple program job codes), or year="2021" as parameters.
  * Version:           1.0.0
  * Author:            Michael Bonner
  * Author URI:        https://bootpackdigital.com
