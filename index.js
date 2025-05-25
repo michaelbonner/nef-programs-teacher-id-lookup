@@ -266,7 +266,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
           className={step > 2 ? "active" : ""}
           disabled={step < 3}
         >
-          <strong>3</strong> <small>Submit your form</small>
+          <strong>3</strong> <small>Fill out your form</small>
         </button>
       </div>
 
@@ -401,7 +401,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
                   selectedTeacher.teacherID || selectedTeacher.id
                 }`}
               >
-                Submit your form
+                  Click to fill and Submit your form
               </a>
             ) : (
               <a
@@ -409,7 +409,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
                   selectedTeacher.teacherID || selectedTeacher.id
                 }`}
               >
-                Submit your form
+                Click to fill and Submit your form
               </a>
             )}
           </p>
