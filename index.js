@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { createRoot } from "react-dom/client";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import axios from "axios";
@@ -412,12 +413,12 @@ var teacherIdContainer = document.getElementById(
   "NEF_Programs_Teacher_ID_Lookup_app"
 );
 if (teacherIdContainer) {
-  ReactDOM.render(
+  const root = createRoot(teacherIdContainer); // createRoot(container!) if you use TypeScript
+  root.render(
     <TeacherIDLookup
       programId={teacherIdContainer.getAttribute("program_id")}
       programJobCode={teacherIdContainer.getAttribute("program_job_code")}
       year={teacherIdContainer.getAttribute("year")}
-    />,
-    teacherIdContainer
+    />
   );
 }
