@@ -45,7 +45,7 @@ add_shortcode(
         wp_enqueue_script(
             'nef_programs_teacher_id_lookup',
             plugins_url(
-                'dist/index.80b8afc8.js',
+                'dist/teacher-id-lookup.31b6bd86.js',
                 __FILE__
             ),
             [],
@@ -53,9 +53,10 @@ add_shortcode(
             true
         );
         ob_start();
-?>
-    <div id="NEF_Programs_Teacher_ID_Lookup_app" program_id="<?= $programId ?>" year="<?= $year ?>" program_job_code="<?= $programJobCode ?>">Loading teacher lookup...</div>
-<?php
+        ?>
+    <div id="NEF_Programs_Teacher_ID_Lookup_app" program_id="<?= $programId ?>" year="<?= $year ?>"
+        program_job_code="<?= $programJobCode ?>">Loading teacher lookup...</div>
+    <?php
         return ob_get_clean();
     }
 );
