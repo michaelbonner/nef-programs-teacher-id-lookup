@@ -14,7 +14,7 @@
     "parcel": "^2.9.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^6.1.18"
   },
   "devDependencies": {
     "buffer": "^6.0.3",
