@@ -36,13 +36,6 @@ add_shortcode(
             (int) $attributes['year'] :
             '*';
         wp_enqueue_script(
-            'polyfill_io',
-            'https://cdn.polyfill.io/v2/polyfill.min.js',
-            [],
-            '',
-            false
-        );
-        wp_enqueue_script(
             'nef_programs_teacher_id_lookup',
             plugins_url(
                 'dist/teacher-id-lookup.31b6bd86.js',
