@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { createRoot } from "react-dom/client";
-import ReactDOM from "react-dom";
-import styled from "styled-components";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { createRoot } from "react-dom/client";
+import styled from "styled-components";
 
 const Container = styled.div`
   font-family: sans-serif;
@@ -168,7 +167,6 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
     const url = new URL(`${apiBaseUrl}teacher-search`);
     url.searchParams.set("school_id", selectedSchool.id);
     url.searchParams.set("last_name", teacherSearch);
-    url.searchParams.set("participatingOnly", true);
 
     const endpoint = url.toString();
 
@@ -196,6 +194,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
     url.searchParams.set("programId", programId);
     url.searchParams.set("programJobCode", programJobCode);
     url.searchParams.set("year", year);
+    url.searchParams.set("participatingOnly", true);
 
     const endpoint = url.toString();
 
