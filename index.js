@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import styled from "styled-components";
@@ -170,9 +169,14 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
 
     const endpoint = url.toString();
 
-    axios
-      .get(endpoint)
-      .then(({ data }) => {
+    fetch(endpoint)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
         setTeacherSearchState("loaded");
         setTeachers(data.data);
       })
@@ -199,9 +203,14 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
     const endpoint = url.toString();
 
     const nameKey = "name";
-    axios
-      .get(endpoint)
-      .then(({ data }) => {
+    fetch(endpoint)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
         setSchoolSearchState("loaded");
         setSchools(
           data.data.sort(
@@ -401,7 +410,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
                   selectedTeacher.teacherID || selectedTeacher.id
                 }`}
               >
-                  Click to fill and Submit your form
+                Click to fill and Submit your form
               </a>
             ) : (
               <a
