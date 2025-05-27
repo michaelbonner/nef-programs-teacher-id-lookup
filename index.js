@@ -287,7 +287,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
             }`}
           >
             <button
-              type="button"
+              type="submit"
               disabled={isSubmitting || schoolSearch === ""}
               onClick={searchForSchools}
             >

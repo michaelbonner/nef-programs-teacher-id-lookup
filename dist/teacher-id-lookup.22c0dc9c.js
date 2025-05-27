@@ -7576,7 +7576,7 @@ const $e006d69646ee18d5$var$TeacherIDLookup = ({ programId: programId, programJo
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("div", {
                         className: `${isSubmitting || schoolSearch === "" ? "opacity-25" : ""}`,
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("button", {
-                            type: "button",
+                            type: "submit",
                             disabled: isSubmitting || schoolSearch === "",
                             onClick: searchForSchools,
                             children: "Search for School"
