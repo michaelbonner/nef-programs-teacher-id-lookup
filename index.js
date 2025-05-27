@@ -165,7 +165,12 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
       return;
     }
 
-    const endpoint = `${apiBaseUrl}teacher-search?school_id=${selectedSchool.id}&last_name=${teacherSearch}`;
+    const url = new URL(`${apiBaseUrl}teacher-search`);
+    url.searchParams.set("school_id", selectedSchool.id);
+    url.searchParams.set("last_name", teacherSearch);
+    url.searchParams.set("participatingOnly", true);
+
+    const endpoint = url.toString();
 
     axios
       .get(endpoint)
@@ -186,7 +191,13 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
   const searchForSchools = () => {
     setIsSubmitting(true);
 
-    const endpoint = `${apiBaseUrl}school-search?search=${schoolSearch}&programId=${programId}&programJobCode=${programJobCode}&year=${year}`;
+    const url = new URL(`${apiBaseUrl}school-search`);
+    url.searchParams.set("search", schoolSearch);
+    url.searchParams.set("programId", programId);
+    url.searchParams.set("programJobCode", programJobCode);
+    url.searchParams.set("year", year);
+
+    const endpoint = url.toString();
 
     const nameKey = "name";
     axios
