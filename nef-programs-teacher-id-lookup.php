@@ -49,7 +49,7 @@ add_shortcode(
                 __FILE__
             ),
             [],
-            '',
+            '1.01',
             true
         );
         ob_start();
