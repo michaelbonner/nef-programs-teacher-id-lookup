@@ -172,7 +172,8 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
         setTeacherSearchState("loaded");
         setTeachers(data.data);
       })
-      .catch((response) => {
+      .catch((error) => {
+        console.error(error);
         setTeachers([]);
         setTeacherSearchState("error");
       })
@@ -200,7 +201,8 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
           setSchoolSearchState("error");
         }
       })
-      .catch((response) => {
+      .catch((error) => {
+        console.error(error);
         setSchoolSearchState("error");
       })
       .finally(() => {
@@ -288,7 +290,6 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
               type="button"
               disabled={isSubmitting || schoolSearch === ""}
               onClick={searchForSchools}
-              type="submit"
             >
               Search for School
             </button>
