@@ -42,7 +42,7 @@ add_shortcode(
                 __FILE__
             ),
             [],
-            '1.01',
+            '1.0.1',
             true
         );
         ob_start();
