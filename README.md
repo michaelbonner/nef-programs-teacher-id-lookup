@@ -37,7 +37,7 @@ We are using CSS custom properties to allow overriding the default colors. You c
 
 ```
 #teacher_id_lookup_container {
-	--nef-teacher-lookup-text-color: #4a5568;
+  --nef-teacher-lookup-text-color: #4a5568;
   --nef-teacher-lookup-light-color: #a0aec0;
   --nef-teacher-lookup-base-color: #38b2ac;
   --nef-teacher-lookup-accent-color: #ffffff;
