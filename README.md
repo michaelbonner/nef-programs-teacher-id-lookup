@@ -3,7 +3,6 @@
 ## Getting started
 
 1. Clone this repo
-1. Ensure parcel is installed globally: `npm install -g parcel-bundler`
 1. Run `npm install`
 1. Run `npm run start`
 
