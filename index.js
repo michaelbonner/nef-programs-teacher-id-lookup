@@ -199,6 +199,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
     url.searchParams.set("programJobCode", programJobCode);
     url.searchParams.set("year", year);
     url.searchParams.set("participatingOnly", true);
+    url.searchParams.set("pastPresentationsOnly", true);
 
     const endpoint = url.toString();
 
