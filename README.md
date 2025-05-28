@@ -9,12 +9,11 @@
 ## Build for production
 
 1. Run `npm run build`
-1. Commit the generated files in the `dist` folder
+1. Commit the generated files
 
 ## Deploy the plugin
 
-1. Use ssh to connect to the server instance
-1. `git pull` the plugin
+1. Sync the `nef-programs-teacher-id-lookup.php` file and the `dist` directory to the `plugins/teacher-id-lookup` directory of the site.
 
 ## Use the shortcode
 
