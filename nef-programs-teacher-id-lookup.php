@@ -38,11 +38,11 @@ add_shortcode(
         wp_enqueue_script(
             'nef_programs_teacher_id_lookup',
             plugins_url(
-                'dist/teacher-id-lookup.31b6bd86.js',
+                'dist/teacher-id-lookup.5675e8e2.js',
                 __FILE__
             ),
             [],
-            '1.1.1',
+            '1.1.2',
             true
         );
         ob_start();
