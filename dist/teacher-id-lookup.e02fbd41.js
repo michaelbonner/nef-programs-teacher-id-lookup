@@ -914,7 +914,6 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
         url.searchParams.set("programJobCode", programJobCode);
         url.searchParams.set("year", year);
         url.searchParams.set("participatingOnly", true);
-        url.searchParams.set("pastPresentationsOnly", true);
         const endpoint = url.toString();
         const nameKey = "name";
         fetch(endpoint).then((response)=>{
@@ -922,8 +921,14 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
             return response.json();
         }).then((data)=>{
             setSchoolSearchState("loaded");
-            setSchools(data.data.sort((a, b)=>a[nameKey].toLowerCase() > b[nameKey].toLowerCase()));
-            if (!data.data.length) setSchoolSearchState("error");
+            // Filter to schools with finished presentations
+            const schoolsWithFinishedPresentations = data.data.filter((school)=>school.has_finished_presentations);
+            setSchools(schoolsWithFinishedPresentations.sort((a, b)=>a[nameKey].toLowerCase() > b[nameKey].toLowerCase()));
+            if (!schoolsWithFinishedPresentations.length) {
+                // No schools with past presentations - check if there are future ones
+                if (data.data.length > 0) setSchoolSearchState("future_only");
+                else setSchoolSearchState("error");
+            }
         }).catch((error)=>{
             console.error(error);
             setSchoolSearchState("error");
@@ -944,7 +949,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                 children: "Find your teacher ID"
             }, void 0, false, {
                 fileName: "index.js",
-                lineNumber: 241,
+                lineNumber: 249,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -968,7 +973,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "1"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 257,
+                                lineNumber: 265,
                                 columnNumber: 11
                             }, undefined),
                             " ",
@@ -976,13 +981,13 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "Find your school"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 257,
+                                lineNumber: 265,
                                 columnNumber: 30
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "index.js",
-                        lineNumber: 243,
+                        lineNumber: 251,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1001,7 +1006,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "2"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 271,
+                                lineNumber: 279,
                                 columnNumber: 11
                             }, undefined),
                             " ",
@@ -1009,13 +1014,13 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "Find your teacher"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 271,
+                                lineNumber: 279,
                                 columnNumber: 30
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "index.js",
-                        lineNumber: 259,
+                        lineNumber: 267,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -1028,7 +1033,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "3"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 279,
+                                lineNumber: 287,
                                 columnNumber: 11
                             }, undefined),
                             " ",
@@ -1036,19 +1041,19 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "Fill out your form"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 279,
+                                lineNumber: 287,
                                 columnNumber: 30
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "index.js",
-                        lineNumber: 273,
+                        lineNumber: 281,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "index.js",
-                lineNumber: 242,
+                lineNumber: 250,
                 columnNumber: 7
             }, undefined),
             step === 1 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1061,7 +1066,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "Enter the keyword of your school's name. Example - Kennedy for John F Kennedy"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 286,
+                                lineNumber: 294,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -1077,13 +1082,13 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 value: schoolSearch
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 290,
+                                lineNumber: 298,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "index.js",
-                        lineNumber: 285,
+                        lineNumber: 293,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1095,21 +1100,24 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                             children: "Search for School"
                         }, void 0, false, {
                             fileName: "index.js",
-                            lineNumber: 310,
+                            lineNumber: 317,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "index.js",
-                        lineNumber: 305,
+                        lineNumber: 313,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        style: {
+                            marginTop: "1rem"
+                        },
                         children: [
                             schools.length ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                 children: "Choose from the list"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 319,
+                                lineNumber: 326,
                                 columnNumber: 31
                             }, undefined) : "",
                             schoolSearchState === "error" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1117,7 +1125,14 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "No schools match your search"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 321,
+                                lineNumber: 328,
+                                columnNumber: 15
+                            }, undefined),
+                            schoolSearchState === "future_only" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: "No schools available yet - check back after receiving your kit"
+                            }, void 0, false, {
+                                fileName: "index.js",
+                                lineNumber: 331,
                                 columnNumber: 15
                             }, undefined),
                             schools.map((school)=>{
@@ -1144,25 +1159,25 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                         ]
                                     }, void 0, true, {
                                         fileName: "index.js",
-                                        lineNumber: 337,
+                                        lineNumber: 347,
                                         columnNumber: 19
                                     }, undefined)
                                 }, schoolId, false, {
                                     fileName: "index.js",
-                                    lineNumber: 336,
+                                    lineNumber: 346,
                                     columnNumber: 17
                                 }, undefined);
                             })
                         ]
                     }, void 0, true, {
                         fileName: "index.js",
-                        lineNumber: 318,
+                        lineNumber: 325,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "index.js",
-                lineNumber: 284,
+                lineNumber: 292,
                 columnNumber: 9
             }, undefined),
             step === 2 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1172,7 +1187,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                         children: "Great! Now tell us which teacher you have."
                     }, void 0, false, {
                         fileName: "index.js",
-                        lineNumber: 361,
+                        lineNumber: 371,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1182,7 +1197,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 children: "Teacher Last Name"
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 364,
+                                lineNumber: 374,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -1195,20 +1210,20 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 }
                             }, void 0, false, {
                                 fileName: "index.js",
-                                lineNumber: 365,
+                                lineNumber: 375,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "index.js",
-                        lineNumber: 363,
+                        lineNumber: 373,
                         columnNumber: 11
                     }, undefined),
                     teachers.length ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         children: "Choose your teacher from the list"
                     }, void 0, false, {
                         fileName: "index.js",
-                        lineNumber: 376,
+                        lineNumber: 386,
                         columnNumber: 30
                     }, undefined) : "",
                     teacherSearchState === "error" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1216,7 +1231,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                         children: "No teachers match your search"
                     }, void 0, false, {
                         fileName: "index.js",
-                        lineNumber: 378,
+                        lineNumber: 388,
                         columnNumber: 13
                     }, undefined),
                     teachers.map((teacher)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1237,18 +1252,18 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                                 ]
                             }, void 0, true, {
                                 fileName: "index.js",
-                                lineNumber: 382,
+                                lineNumber: 392,
                                 columnNumber: 15
                             }, undefined)
                         }, teacher.teacherID || teacher.id, false, {
                             fileName: "index.js",
-                            lineNumber: 381,
+                            lineNumber: 391,
                             columnNumber: 13
                         }, undefined))
                 ]
             }, void 0, true, {
                 fileName: "index.js",
-                lineNumber: 360,
+                lineNumber: 370,
                 columnNumber: 9
             }, undefined),
             step === 3 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -1263,7 +1278,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                         ]
                     }, void 0, true, {
                         fileName: "index.js",
-                        lineNumber: 402,
+                        lineNumber: 412,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -1273,7 +1288,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                         ]
                     }, void 0, true, {
                         fileName: "index.js",
-                        lineNumber: 406,
+                        lineNumber: 416,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -1282,31 +1297,31 @@ const TeacherIDLookup = ({ programId, programJobCode, year })=>{
                             children: "Click to fill and Submit your form"
                         }, void 0, false, {
                             fileName: "index.js",
-                            lineNumber: 409,
+                            lineNumber: 419,
                             columnNumber: 15
                         }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
                             href: `https://worksheets.nef1.org/forms/show/${selectedTeacher.teacherID || selectedTeacher.id}`,
                             children: "Click to fill and Submit your form"
                         }, void 0, false, {
                             fileName: "index.js",
-                            lineNumber: 417,
+                            lineNumber: 426,
                             columnNumber: 15
                         }, undefined)
                     }, void 0, false, {
                         fileName: "index.js",
-                        lineNumber: 407,
+                        lineNumber: 417,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "index.js",
-                lineNumber: 401,
+                lineNumber: 411,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "index.js",
-        lineNumber: 240,
+        lineNumber: 248,
         columnNumber: 5
     }, undefined);
 };
@@ -1321,7 +1336,7 @@ if (teacherIdContainer) {
         year: teacherIdContainer.getAttribute("year")
     }, void 0, false, {
         fileName: "index.js",
-        lineNumber: 438,
+        lineNumber: 446,
         columnNumber: 5
     }, undefined));
 }

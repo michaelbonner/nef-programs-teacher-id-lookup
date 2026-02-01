@@ -322,7 +322,7 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
               Search for School
             </button>
           </div>
-          <div>
+          <div style={{ marginTop: "1rem" }}>
             {schools.length ? <p>Choose from the list</p> : ""}
             {schoolSearchState === "error" && (
               <div className="error-message">No schools match your search</div>
