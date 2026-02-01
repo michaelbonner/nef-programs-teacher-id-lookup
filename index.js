@@ -199,7 +199,6 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
     url.searchParams.set("programJobCode", programJobCode);
     url.searchParams.set("year", year);
     url.searchParams.set("participatingOnly", true);
-    url.searchParams.set("pastPresentationsOnly", true);
 
     const endpoint = url.toString();
 
@@ -213,13 +212,22 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
       })
       .then((data) => {
         setSchoolSearchState("loaded");
+        // Filter to schools with finished presentations
+        const schoolsWithFinishedPresentations = data.data.filter(
+          (school) => school.has_finished_presentations
+        );
         setSchools(
-          data.data.sort(
+          schoolsWithFinishedPresentations.sort(
             (a, b) => a[nameKey].toLowerCase() > b[nameKey].toLowerCase()
           )
         );
-        if (!data.data.length) {
-          setSchoolSearchState("error");
+        if (!schoolsWithFinishedPresentations.length) {
+          // No schools with past presentations - check if there are future ones
+          if (data.data.length > 0) {
+            setSchoolSearchState("future_only");
+          } else {
+            setSchoolSearchState("error");
+          }
         }
       })
       .catch((error) => {
@@ -303,9 +311,8 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
             />
           </div>
           <div
-            className={`${
-              isSubmitting || schoolSearch === "" ? "opacity-25" : ""
-            }`}
+            className={`${isSubmitting || schoolSearch === "" ? "opacity-25" : ""
+              }`}
           >
             <button
               type="submit"
@@ -320,14 +327,17 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
             {schoolSearchState === "error" && (
               <div className="error-message">No schools match your search</div>
             )}
+            {schoolSearchState === "future_only" && (
+              <div>No schools available yet - check back after receiving your kit</div>
+            )}
             {schools.map((school) => {
               const schoolId = school.schoolID || school.id;
               const schoolName = school.schoolName || school.name;
               const programName = school.programShortDescription
                 ? school.programShortDescription.replace(
-                    new Date().getFullYear(),
-                    ""
-                  )
+                  new Date().getFullYear(),
+                  ""
+                )
                 : school.program_name;
               const schoolCity = school.schoolCity || school.city;
               const schoolState = school.schoolState || school.state;
@@ -407,17 +417,15 @@ const TeacherIDLookup = ({ programId, programJobCode, year }) => {
           <p>
             {selectedTeacher.teacherID ? (
               <a
-                href={`https://hews.nef1.org/forms/show/${
-                  selectedTeacher.teacherID || selectedTeacher.id
-                }`}
+                href={`https://hews.nef1.org/forms/show/${selectedTeacher.teacherID || selectedTeacher.id
+                  }`}
               >
                 Click to fill and Submit your form
               </a>
             ) : (
               <a
-                href={`https://worksheets.nef1.org/forms/show/${
-                  selectedTeacher.teacherID || selectedTeacher.id
-                }`}
+                href={`https://worksheets.nef1.org/forms/show/${selectedTeacher.teacherID || selectedTeacher.id
+                  }`}
               >
                 Click to fill and Submit your form
               </a>
